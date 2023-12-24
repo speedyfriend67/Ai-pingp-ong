@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ping Pong Game</title>
+  <style>
+    #game-board {
+      font-size: 20px;
+      line-height: 1.2em;
+      white-space: pre;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-board">
+    AI 1 serves the ball.
+    --------------
+    |            |
+    |            |
+    |     O      |   <!-- Ball -->
+    |            |
+    |            |
+    --------------
+  </div>
+
+  <script>
+    // Simulate AI vs. AI ping pong game logic (purely illustrative)
+    setInterval(function() {
+      // Your logic for ball movement, AI actions, etc.
+      // Update the HTML content accordingly.
+      document.getElementById('game-board').innerHTML = `
+AI 1 serves the ball.
+--------------
+|            |
+|            |
+|     O      |   <!-- Ball -->
+|            |
+|            |
+--------------
+      `;
+    }, 1000); // Update every second (for example)
+  </script>
+</body>
+</html>
