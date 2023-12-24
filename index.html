@@ -5,41 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ping Pong Game</title>
   <style>
-    #game-board {
-      font-size: 20px;
-      line-height: 1.2em;
-      white-space: pre;
+    body {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #222;
+    }
+
+    canvas {
+      border: 1px solid #fff;
     }
   </style>
 </head>
 <body>
-  <div id="game-board">
-    AI 1 serves the ball.
-    --------------
-    |            |
-    |            |
-    |     O      |   <!-- Ball -->
-    |            |
-    |            |
-    --------------
-  </div>
+  <canvas id="pingPongCanvas" width="800" height="400"></canvas>
 
   <script>
-    // Simulate AI vs. AI ping pong game logic (purely illustrative)
-    setInterval(function() {
-      // Your logic for ball movement, AI actions, etc.
-      // Update the HTML content accordingly.
-      document.getElementById('game-board').innerHTML = `
-AI 1 serves the ball.
---------------
-|            |
-|            |
-|     O      |   <!-- Ball -->
-|            |
-|            |
---------------
-      `;
-    }, 1000); // Update every second (for example)
+    const canvas = document.getElementById("pingPongCanvas");
+    const context = canvas.getContext("2d");
+
+    // Initial paddle and ball positions
+    let paddle1Y = 150;
+    let paddle2Y = 150;
+    let paddleWidth = 10;
+    let paddleHeight = 60;
+
+    let ballX = 50;
+    let ballY = 50;
+    let ballSpeedX = 5;
+    let ballSpeedY = 2;
+
+    // Function to draw paddles and ball
+    function drawEverything() {
+      // Clear the canvas
+      context.fillStyle = "#222";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw paddles
+      context.fillStyle = "#fff";
+      context.fillRect(0, paddle1Y, paddleWidth, paddleHeight);
+      context.fillRect(canvas.width - paddleWidth, paddle2Y, paddleWidth, paddleHeight);
+
+      // Draw ball
+      context.beginPath();
+      context.arc(ballX, ballY, 10, 0, Math.PI * 2);
+      context.fillStyle = "#fff";
+      context.fill();
+      context.closePath();
+    }
+
+    // Function to move paddles and update ball position
+    function moveEverything() {
+      // Move paddles
+      paddle1Y += 2; // Placeholder for paddle movement logic
+
+      // Move ball
+      ballX += ballSpeedX;
+      ballY += ballSpeedY;
+
+      // Ball collision with walls
+      if (ballX > canvas.width || ballX < 0) {
+        ballSpeedX = -ballSpeedX;
+      }
+
+      if (ballY > canvas.height || ballY < 0) {
+        ballSpeedY = -ballSpeedY;
+      }
+
+      // Placeholder for ball collision with paddles logic
+    }
+
+    // Function to update game state and redraw
+    function updateGame() {
+      moveEverything();
+      drawEverything();
+    }
+
+    // Set game update interval
+    setInterval(updateGame, 30); // 30 milliseconds per frame
   </script>
 </body>
 </html>
