@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ping Pong Game</title>
+  <title>Ping Pong Game with AI</title>
   <style>
     body {
       margin: 0;
@@ -26,7 +26,6 @@
     const canvas = document.getElementById("pingPongCanvas");
     const context = canvas.getContext("2d");
 
-    // Initial paddle and ball positions
     let paddle1Y = 150;
     let paddle2Y = 150;
     let paddleWidth = 10;
@@ -39,16 +38,13 @@
 
     // Function to draw paddles and ball
     function drawEverything() {
-      // Clear the canvas
       context.fillStyle = "#222";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw paddles
       context.fillStyle = "#fff";
       context.fillRect(0, paddle1Y, paddleWidth, paddleHeight);
       context.fillRect(canvas.width - paddleWidth, paddle2Y, paddleWidth, paddleHeight);
 
-      // Draw ball
       context.beginPath();
       context.arc(ballX, ballY, 10, 0, Math.PI * 2);
       context.fillStyle = "#fff";
@@ -60,6 +56,14 @@
     function moveEverything() {
       // Move paddles
       paddle1Y += 2; // Placeholder for paddle movement logic
+
+      // Move AI-controlled paddle
+      const aiPaddleCenter = paddle2Y + paddleHeight / 2;
+      if (aiPaddleCenter < ballY - 35) {
+        paddle2Y += 5; // Move down
+      } else if (aiPaddleCenter > ballY + 35) {
+        paddle2Y -= 5; // Move up
+      }
 
       // Move ball
       ballX += ballSpeedX;
@@ -84,7 +88,7 @@
     }
 
     // Set game update interval
-    setInterval(updateGame, 30); // 30 milliseconds per frame
+    setInterval(updateGame, 30);
   </script>
 </body>
 </html>
